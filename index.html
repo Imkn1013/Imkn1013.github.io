@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Socket.IO Example</title>
+  <title>Socket.IO Client</title>
   <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
 </head>
 <body>
   <h1>Socket.IO Client</h1>
   <script>
-    // 外部サーバーのURLを指定
-    const socket = io("https://your-socket-server-url.com");
+    // GlitchのサーバーURLを指定
+    const socket = io("https://five-daffy-achillobator.glitch.me");
 
-    // 接続確認
+    // サーバーに接続
     socket.on("connect", () => {
       console.log("Connected to the server");
 
