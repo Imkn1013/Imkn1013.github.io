@@ -14,8 +14,10 @@ https://opensource.org/licenses/mit-license.php
 </head>
 <body>
   <h1>Socket.IO Client</h1>
-  <textarea id="roomid">ルームIDを入力</textarea>
-  <button id="mkroom"></button>
+  <textarea id="roomidarea">ルームIDを入力</textarea>
+  <button id="mkroom">ルームを作成/参加</button>
+  <textarea id="messagearea">メッセージを入力</textarea>
+  <button id="sendmessage">ルームにメッセージを送信</button>
   <script>
     // GlitchのサーバーURLを指定
     const socket = io("https://conscious-giddy-antarctopelta.glitch.me");
@@ -33,12 +35,23 @@ https://opensource.org/licenses/mit-license.php
       console.log("Received message from server:", data);
     });
 
+    // ルーム内のメッセージを受信
+    socket.on('message', (data) => {
+      console.log('Room message:', data);
+    });
+
     document.getElementById("mkroom").addEventListener('click', function(){
-      const roomid=document.getElementById("roomid").value;
+      const roomid=document.getElementById("roomidarea").value;
       socket.emit('joinRoom', `${roomid}`);
       socket.on('message', (data) => {
       console.log(data);
       });
+    });
+    var message;
+    document.getElementById("sendmessage").addEventListener('click', function(){
+      message=document.getElementById("messagearea").value;
+      // ルーム内にメッセージを送信
+      socket.emit('sendMessageToRoom', { room: 'room1', message: `${message}` });
     });
     
   </script>
