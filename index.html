@@ -52,7 +52,6 @@ https://opensource.org/licenses/mit-license.php
 
   // メッセージ送信ボタンのクリックイベント
   document.getElementById("sendmessage").addEventListener('click', function () {
-    const roomid ="";
     const message = document.getElementById("messagearea").value;
     if (roomid.trim() === "" || message.trim() === "") {
       console.log("ルームIDとメッセージを入力してください");
@@ -67,9 +66,12 @@ https://opensource.org/licenses/mit-license.php
   // ルーム内のメッセージを受信
   socket.on("roomMessage", (data) => {
     console.log(`${data.room}: ${data.message}`);
-    
   });
 
+  socket.on("leaveRoom", (data) => {
+    console.log(`${data.message}`);
+  });
+  
   // サーバーからルームメンバーリストを受信
   socket.on("roomMembers", ({ room, members }) => {
     //console.log(`Members in room ${room}:`, members);
