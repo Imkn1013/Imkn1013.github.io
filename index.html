@@ -34,13 +34,12 @@ https://opensource.org/licenses/mit-license.php
 
   // サーバーからのメッセージを受信
   socket.on("message", (data) => {
-    console.log("Received message:", data);
+    console.log(`${data.message}`);
   });
 
-  var roomid=null;
   // ルーム作成/参加ボタンのクリックイベント
   document.getElementById("mkroom").addEventListener('click', function () {
-    roomid = document.getElementById("roomidarea").value;
+    const roomid = document.getElementById("roomidarea").value;
     if (roomid.trim() === "") {
       console.log("ルームIDを入力してください");
       return;
@@ -48,20 +47,24 @@ https://opensource.org/licenses/mit-license.php
 
     // ルームに参加
     socket.emit('joinRoom', roomid);
-    console.log(`${roomid}に参加しました。`);
+    console.log(`${data.room}に参加しました。`);
   });
 
   // メッセージ送信ボタンのクリックイベント
   document.getElementById("sendmessage").addEventListener('click', function () {
     const message = document.getElementById("messagearea").value;
-    if (roomid.trim() === "" || message.trim() === "") {
-      console.log("ルームIDとメッセージを入力してください");
-      return;
+    if(data.room){
+      if (message.trim() === "") {
+        console.log("メッセージを入力してください");
+        return;
+      }
+    }else{
+      console.log("ルームに入っていません。")
     }
 
     // ルーム内にメッセージを送信
-    socket.emit('sendMessageToRoom', { room: roomid, message: message });
-    //console.log(`Sent message to room ${roomid}: ${message}`);
+    socket.emit('sendMessageToRoom', { room: ${data.room}, message: message });
+    //console.log(`Sent message to room ${data.room}: ${message}`);
   });
 
   // ルーム内のメッセージを受信
@@ -69,9 +72,6 @@ https://opensource.org/licenses/mit-license.php
     console.log(`${data.room}: ${data.message}`);
   });
 
-  socket.on("leaveRoom", (data) => {
-    console.log(`${data.message}`);
-  });
   
   // サーバーからルームメンバーリストを受信
   socket.on("roomMembers", ({ room, members }) => {
@@ -92,8 +92,7 @@ https://opensource.org/licenses/mit-license.php
   });
 
   document.getElementById("leaveRoom").addEventListener("click", function () {
-    console.log(`${roomid}から退出しました。`);
-    roomid="";
+    console.log(`${data.room}から退出しました。`);
     socket.emit("leaveRoom"); //ルームの退出
     document.getElementById("memberList").innerHTML="";
     document.getElementById("chatlist").innerHTML="";
