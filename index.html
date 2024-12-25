@@ -1,103 +1,62 @@
-<!-- 
-Socket.IO v2.1.1
-(c) 2014-2018 Guillermo Rauch
-Released under the MIT License.
-https://opensource.org/licenses/mit-license.php
--->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Socket.IO Client</title>
-  <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
-</head>
-<body>
-  <h1>Socket.IO Client</h1>
-  <textarea id="roomidarea">ルームIDを入力</textarea>
-  <button id="mkroom">ルームを作成/参加</button>
-  <button id="leaveRoom">ルームを退出</button>
-  <textarea id="messagearea">メッセージを入力</textarea>
-  <button id="sendmessage">ルームにメッセージを送信</button>
-  <p>メンバーリスト</p>
-  <ul id="memberList"></ul>
-  <p>チャット</p>
-  <ul id="chatlist"></ul>
 <script>
-  // サーバーURLを指定
   const socket = io("https://conscious-giddy-antarctopelta.glitch.me");
+  let data = { room: null }; // ルーム情報を格納
 
-  // サーバーに接続
   socket.on("connect", () => {
     console.log("Connected to the server");
   });
 
-  // サーバーからのメッセージを受信
-  socket.on("message", (data) => {
-    console.log(`${data.message}`);
-  });
-
-  // ルーム作成/参加ボタンのクリックイベント
-  document.getElementById("mkroom").addEventListener('click', function () {
-    const roomid = document.getElementById("roomidarea").value;
-    if (roomid.trim() === "") {
+  document.getElementById("mkroom").addEventListener("click", function () {
+    const roomid = document.getElementById("roomidarea").value.trim();
+    if (roomid === "") {
       console.log("ルームIDを入力してください");
       return;
     }
-
-    // ルームに参加
-    socket.emit('joinRoom', roomid);
-    console.log(`${data.room}に参加しました。`);
+    socket.emit("joinRoom", roomid);
+    data.room = roomid; // 現在のルームを記録
+    console.log(`${roomid}に参加しました。`);
   });
 
-  // メッセージ送信ボタンのクリックイベント
-  document.getElementById("sendmessage").addEventListener('click', function () {
-    const message = document.getElementById("messagearea").value;
-    if(data.room){
-      if (message.trim() === "") {
+  document.getElementById("sendmessage").addEventListener("click", function () {
+    const message = document.getElementById("messagearea").value.trim();
+    if (data.room) {
+      if (message === "") {
         console.log("メッセージを入力してください");
         return;
       }
-    }else{
-      console.log("ルームに入っていません。")
+      socket.emit("sendMessageToRoom", { room: data.room, message });
+    } else {
+      console.log("ルームに入っていません。");
     }
-
-    // ルーム内にメッセージを送信
-    socket.emit('sendMessageToRoom', { room: ${data.room}, message: message });
-    //console.log(`Sent message to room ${data.room}: ${message}`);
   });
 
-  // ルーム内のメッセージを受信
   socket.on("roomMessage", (data) => {
     console.log(`${data.room}: ${data.message}`);
   });
 
-  
-  // サーバーからルームメンバーリストを受信
   socket.on("roomMembers", ({ room, members }) => {
-    //console.log(`Members in room ${room}:`, members);
-
-    // メンバーリストを表示
     const memberList = document.getElementById("memberList");
-    memberList.innerHTML = ""; // 既存のリストをクリア
+    memberList.innerHTML = "";
     members.forEach((member) => {
       const listItem = document.createElement("li");
       listItem.textContent = member;
       memberList.appendChild(listItem);
     });
   });
-  
+
   socket.on("errorMessage", (message) => {
-    alert(message); // エラーメッセージをアラートで表示
+    alert(message);
   });
 
   document.getElementById("leaveRoom").addEventListener("click", function () {
-    console.log(`${data.room}から退出しました。`);
-    socket.emit("leaveRoom"); //ルームの退出
-    document.getElementById("memberList").innerHTML="";
-    document.getElementById("chatlist").innerHTML="";
+    if (data.room) {
+      console.log(`${data.room}から退出しました。`);
+      socket.emit("leaveRoom");
+      data.room = null; // 現在のルーム情報をクリア
+      document.getElementById("memberList").innerHTML = "";
+      document.getElementById("chatlist").innerHTML = "";
+    } else {
+      console.log("退出するルームがありません。");
+    }
   });
-  
 </script>
-</body>
-</html>
