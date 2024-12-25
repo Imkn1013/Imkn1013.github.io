@@ -37,9 +37,10 @@ https://opensource.org/licenses/mit-license.php
     console.log("Received message:", data);
   });
 
+  var roomid=null;
   // ルーム作成/参加ボタンのクリックイベント
   document.getElementById("mkroom").addEventListener('click', function () {
-    const roomid = document.getElementById("roomidarea").value;
+    roomid = document.getElementById("roomidarea").value;
     if (roomid.trim() === "") {
       console.log("ルームIDを入力してください");
       return;
