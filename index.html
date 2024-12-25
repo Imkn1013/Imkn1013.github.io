@@ -18,38 +18,52 @@ https://opensource.org/licenses/mit-license.php
   <button id="mkroom">ルームを作成/参加</button>
   <textarea id="messagearea">メッセージを入力</textarea>
   <button id="sendmessage">ルームにメッセージを送信</button>
-  <script>
-    // GlitchのサーバーURLを指定
-    const socket = io("https://conscious-giddy-antarctopelta.glitch.me");
+<script>
+  // サーバーURLを指定
+  const socket = io("https://conscious-giddy-antarctopelta.glitch.me");
 
-    // サーバーに接続
-    socket.on("connect", () => {
-      console.log("Connected to the server");
+  // サーバーに接続
+  socket.on("connect", () => {
+    console.log("Connected to the server");
+  });
 
-      // サーバーにメッセージを送信
-      socket.emit("message", "Hello, Server!");
-    });
+  // サーバーからのメッセージを受信
+  socket.on("message", (data) => {
+    console.log("Received message:", data);
+  });
 
+  // ルーム作成/参加ボタンのクリックイベント
+  document.getElementById("mkroom").addEventListener('click', function () {
+    const roomid = document.getElementById("roomidarea").value;
+    if (roomid.trim() === "") {
+      console.log("ルームIDを入力してください");
+      return;
+    }
 
-    // ルーム内のメッセージを受信
-    socket.on('message', (data) => {
-      console.log('Room message:', data);
-    });
+    // ルームに参加
+    socket.emit('joinRoom', roomid);
+    console.log(`Joining room: ${roomid}`);
+  });
 
-    document.getElementById("mkroom").addEventListener('click', function(){
-      const roomid=document.getElementById("roomidarea").value;
-      socket.emit('joinRoom', `${roomid}`);
-      socket.on('message', (data) => {
-      console.log(data);
-      });
-    });
-    var message;
-    document.getElementById("sendmessage").addEventListener('click', function(){
-      message=document.getElementById("messagearea").value;
-      // ルーム内にメッセージを送信
-      socket.emit('sendMessageToRoom', { room: '${roomid}', message: `${message}` });
-    });
-    
-  </script>
+  // メッセージ送信ボタンのクリックイベント
+  document.getElementById("sendmessage").addEventListener('click', function () {
+    const roomid = document.getElementById("roomidarea").value;
+    const message = document.getElementById("messagearea").value;
+
+    if (roomid.trim() === "" || message.trim() === "") {
+      console.log("ルームIDとメッセージを入力してください");
+      return;
+    }
+
+    // ルーム内にメッセージを送信
+    socket.emit('sendMessageToRoom', { room: roomid, message: message });
+    console.log(`Sent message to room ${roomid}: ${message}`);
+  });
+
+  // ルーム内のメッセージを受信
+  socket.on("roomMessage", (data) => {
+    console.log(`Message from room ${data.room}: ${data.message}`);
+  });
+</script>
 </body>
 </html>
