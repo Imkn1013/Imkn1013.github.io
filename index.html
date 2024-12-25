@@ -91,8 +91,9 @@ https://opensource.org/licenses/mit-license.php
   });
 
   document.getElementById("leaveRoom").addEventListener("click", function () {
+    console.log(`${roomid}から退出しました。`);
+    roomid="";
     socket.emit("leaveRoom"); //ルームの退出
-    console.log(`${roomid}から退出しました。`)
     document.getElementById("memberList").innerHTML="";
     document.getElementById("chatlist").innerHTML="";
   });
