@@ -21,6 +21,8 @@ https://opensource.org/licenses/mit-license.php
   <button id="sendmessage">ルームにメッセージを送信</button>
   <p>メンバーリスト</p>
   <ul id="memberList"></ul>
+  <p>チャット</p>
+  <ul id="chatlist"></ul>
 <script>
   // サーバーURLを指定
   const socket = io("https://conscious-giddy-antarctopelta.glitch.me");
@@ -45,14 +47,13 @@ https://opensource.org/licenses/mit-license.php
 
     // ルームに参加
     socket.emit('joinRoom', roomid);
-    console.log(`Joining room: ${roomid}`);
+    console.log(`${roomid}に参加しました。`);
   });
 
   // メッセージ送信ボタンのクリックイベント
   document.getElementById("sendmessage").addEventListener('click', function () {
-    const roomid = document.getElementById("roomidarea").value;
+    const roomid ="";
     const message = document.getElementById("messagearea").value;
-
     if (roomid.trim() === "" || message.trim() === "") {
       console.log("ルームIDとメッセージを入力してください");
       return;
@@ -60,19 +61,20 @@ https://opensource.org/licenses/mit-license.php
 
     // ルーム内にメッセージを送信
     socket.emit('sendMessageToRoom', { room: roomid, message: message });
-    console.log(`Sent message to room ${roomid}: ${message}`);
+    //console.log(`Sent message to room ${roomid}: ${message}`);
   });
 
   // ルーム内のメッセージを受信
   socket.on("roomMessage", (data) => {
-    console.log(`Message from room ${data.room}: ${data.message}`);
+    console.log(`${data.room}: ${data.message}`);
+    
   });
 
   // サーバーからルームメンバーリストを受信
   socket.on("roomMembers", ({ room, members }) => {
-    console.log(`Members in room ${room}:`, members);
+    //console.log(`Members in room ${room}:`, members);
 
-    // メンバーリストを表示（例: コンソール出力）
+    // メンバーリストを表示
     const memberList = document.getElementById("memberList");
     memberList.innerHTML = ""; // 既存のリストをクリア
     members.forEach((member) => {
@@ -88,6 +90,9 @@ https://opensource.org/licenses/mit-license.php
 
   document.getElementById("leaveRoom").addEventListener("click", function () {
     socket.emit("leaveRoom"); //ルームの退出
+    console.log(`${roomid}から退出しました。`)
+    document.getElementById("memberList").innerHTML="";
+    document.getElementById("chatlist").innerHTML="";
   });
   
 </script>
