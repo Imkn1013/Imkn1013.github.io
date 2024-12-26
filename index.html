@@ -14,11 +14,17 @@ https://opensource.org/licenses/mit-license.php
 </head>
 <body>
   <h1>Socket.IO Client</h1>
-  <textarea id="roomidarea">ルームIDを入力</textarea>
+  <div>
+  <label for="roomidarea">ルームIDを入力</label>
+  <input id="roomidarea" type="text">
+  <label for="joinnum">参加人数を設定</label>
+  <input id="joinnum" type="text">
   <button id="mkroom">ルームを作成/参加</button>
   <button id="leaveRoom">ルームを退出</button>
-  <textarea id="messagearea">メッセージを入力</textarea>
-  <button id="sendmessage">ルームにメッセージを送信</button>
+  </div><br><div>
+  <label for="messagearea">メッセージを入力</label>
+  <input id="messagearea" type="text">
+  <button id="sendmessage">ルームにメッセージを送信</button></div>
   <p>メンバーリスト</p>
   <ul id="memberList"></ul>
   <p>チャット</p>
@@ -40,14 +46,14 @@ https://opensource.org/licenses/mit-license.php
   // ルーム作成/参加ボタンのクリックイベント
   document.getElementById("mkroom").addEventListener('click', function () {
     const roomid = document.getElementById("roomidarea").value;
+    const joinnum=document.getElementById("joinnum").value;
     if (roomid.trim() === "") {
       console.log("ルームIDを入力してください");
       return;
     }
 
     // ルームに参加
-    socket.emit('joinRoom', roomid);
-    console.log(`${roomid}に参加しました。`);
+    socket.emit('joinRoom', [roomid,joinnum]);
   });
 
   // メッセージ送信ボタンのクリックイベント
