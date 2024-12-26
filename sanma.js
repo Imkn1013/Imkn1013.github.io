@@ -7,6 +7,5 @@ socket.on("sanma_start",function(data){
   canvas.height = window.innerHeight;
   const ctx = canvas.getContext('2d');
   const pai=new Image();
-  pai.src="";
-  
+  pai.src="pai.png";
 });
