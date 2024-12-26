@@ -14,6 +14,7 @@ https://opensource.org/licenses/mit-license.php
 </head>
 <body>
 <div id="menu">
+  <div id="setting">
   <h1>Socket.IO Client</h1>
   <div>
   <label for="roomidarea">ルームIDを入力</label>
@@ -24,6 +25,10 @@ https://opensource.org/licenses/mit-license.php
   <button id="mkroom">ルームを作成/参加</button>
   <button id="leaveRoom">ルームを退出</button>
   </div><br><div>
+    <button id="syogi_button">将棋(2人)</button>
+  <button id="yonma_button">麻雀(四麻)</button>
+  <button id="sanma_button">麻雀(三麻)</button>
+  </div><br></div><div>
   <label for="messagearea">メッセージを入力</label>
   <input id="messagearea" type="text">
   <button id="sendmessage">ルームにメッセージを送信</button></div>
@@ -31,9 +36,6 @@ https://opensource.org/licenses/mit-license.php
   <ul id="memberList"></ul>
   <p>チャット</p>
   <ul id="chatlist"></ul>
-  <button id="syogi_button">将棋(2人)</button>
-  <button id="yonma_button">麻雀(四麻)</button>
-  <button id="sanma_button">麻雀(三麻)</button>
 </div>
 <script>
   // サーバーURLを指定
