@@ -8,4 +8,5 @@ socket.on("sanma_start",function(data){
   const ctx = canvas.getContext('2d');
   const pai=new Image();
   pai.src="pai.png";
+  console.log(data);
 });
