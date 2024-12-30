@@ -28,6 +28,7 @@ https://opensource.org/licenses/mit-license.php
     <button id="syogi_button">将棋(2人)</button>
   <button id="yonma_button">麻雀(四麻)</button>
   <button id="sanma_button">麻雀(三麻)</button>
+    <p>※将棋はゲームを開始した人が先手です。</p>
   </div><br></div><div>
   <label for="messagearea">メッセージを入力</label>
   <input id="messagearea" type="text">
@@ -134,7 +135,7 @@ https://opensource.org/licenses/mit-license.php
     socket.emit("sanma_open");
 });
   document.getElementById("syogi_button").addEventListener("click", function() {
-    socket.emit("syogi_open");
+    socket.emit("syogi_open1");
 });
 
   socket.on("sanma_start",function(){
@@ -142,7 +143,15 @@ https://opensource.org/licenses/mit-license.php
     script.src = "sanma.js";
     document.getElementById("sanma_script").appendChild(script);
   });
-  socket.on("syogi_start",function(){
+  socket.on("syogi_start1",function(data){
+    if(data!==socket.id){
+     let allowstart = window.confirm('将棋を開始しますか？');
+    }
+    if(allowstart){
+      socket.emit("syogi_open2");
+    }
+  });
+  socket.on("syogi_start2",function(){
     var script = document.createElement("script");
     script.src = "syogi.js";
     document.getElementById("syogi_script").appendChild(script);
