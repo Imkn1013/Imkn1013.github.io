@@ -146,9 +146,9 @@ https://opensource.org/licenses/mit-license.php
   socket.on("syogi_start1",function(data){
     if(data!==socket.id){
      let allowstart = window.confirm('将棋を開始しますか？');
-    }
-    if(allowstart){
+     if(allowstart){
       socket.emit("syogi_open2");
+    }
     }
   });
   socket.on("syogi_start2",function(){
