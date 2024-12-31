@@ -154,7 +154,8 @@ https://opensource.org/licenses/mit-license.php
     }
     }
   });
-  socket.on("syogi_start2",function(){
+  socket.on("syogi_start2",function(data){
+    who_host=data;
     console.log("ok2");
     var script = document.createElement("script");
     script.src = "syogi.js";
