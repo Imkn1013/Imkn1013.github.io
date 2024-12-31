@@ -15,7 +15,8 @@ https://opensource.org/licenses/mit-license.php
 <body>
 <div id="menu">
   <div id="setting">
-  <h1>Socket.IO Client</h1>
+  <h1>ボードゲーム集</h1>
+  <h6>―現在の収録数：0</h6>
   <div>
   <label for="roomidarea">ルームIDを入力</label>
   <input id="roomidarea" type="text"></div><br><div>
@@ -147,11 +148,13 @@ https://opensource.org/licenses/mit-license.php
     if(data!==socket.id){
      let allowstart = window.confirm('将棋を開始しますか？');
      if(allowstart){
+       console.log("ok1");
       socket.emit("syogi_open2");
     }
     }
   });
   socket.on("syogi_start2",function(){
+    console.log("ok2");
     var script = document.createElement("script");
     script.src = "syogi.js";
     document.getElementById("syogi_script").appendChild(script);
