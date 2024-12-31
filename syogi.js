@@ -1,4 +1,5 @@
 socket.on("which",function(){
+console.log(data);
 document.getElementById("menu").style.display="none";
 document.getElementById("setting").style.display="none";
 var canvas = document.createElement("canvas");
