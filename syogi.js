@@ -58,10 +58,10 @@ mkaddress([
 ]);
 
 //描画関数
-const trans={
-  "L":lance1,"K":knight1",S":silver1","G":gold1","E":emperor1,"R":rook1,"B":bishop1,"P":pawn1,"D":dragon1,"H":horse1,"T":pawn1p,"X":lance1p,"Y":knight1p,"Z":silver1p,
-  "l":lance2,"k":knight2","s":silver2","g":gold2","e":emperor2,"r":rook2,"b":bishop2,"p":pawn2,"d":dragon2,"h":horse2,"t":pawn2p,"x":lance2p,"y":knight2p,"z":silver2p,
-  "n":null
+const trans = {
+  "L": lance1, "K": knight1, "S": silver1, "G": gold1, "E": emperor1, "R": rook1, "B": bishop1, "P": pawn1, "D": dragon1, "H": horse1, "T": pawn1p, "X": lance1p, "Y": knight1p, "Z": silver1p,
+  "l": lance2, "k": knight2, "s": silver2, "g": gold2, "e": emperor2, "r": rook2, "b": bishop2, "p": pawn2, "d": dragon2, "h": horse2, "t": pawn2p, "x": lance2p, "y": knight2p, "z": silver2p,
+  "n": null
 };
 
 const draw=function(){
@@ -74,13 +74,13 @@ const draw=function(){
 };
 
 //クリックイベント
-const rect,x,y;
+let rect, x, y;
 canvas.addEventListener('click', (event) => {
     rect = canvas.getBoundingClientRect();
-    x = Math.floor((event.clientX - rect.left)/47.35);
-    y = Math.floor((event.clientY - rect.top)/51.9);
+    x = Math.floor((event.clientX - rect.left) / 47.35);
+    y = Math.floor((event.clientY - rect.top) / 51.9);
     draw();
-};
+});
 
 bord.onload = () => {
 ctx.drawImage(bord, 0, 0, 439, 480);
