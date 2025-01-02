@@ -73,7 +73,9 @@ const draw=function(){
   ctx.beginPath();
   ctx.drawImage(bord, 0, 0, 439, 480);
   for(let i=0;i<81;i++){
+    if(field.substr(i,1)!=="n"){
     ctx.drawImage(trans[field.substr(i,1)],47.35*i%9+7,51.9*((i-i%9)/9)+7,47.35,51.9);
+    }
   }
 };
 
