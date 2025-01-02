@@ -23,24 +23,28 @@ let field="LKSGEGSKLnRnnnnnBnPPPPPPPPPnnnnnnnnnnnnnnnnnnnnnnnnnnnpppppppppnbnnnn
 const a="./syogi_koma/";
 const b=".png";
 let part1,part2,part3,address,last;
+
 const mkaddress=function(name1,name2){
- name1.forEach(function(index){
-  if(name1[index].substr(name1[index].length-1,1)=="p"){
-    last=2;
-    part2="prom_";
-  }else{
-    last=1; 
-    part2="";
+  name1.forEach(function(item, index){
+  if (item.substr(item.length - 1, 1) == "p") {
+    last = 2;
+    part2 = "prom_";
+  } else {
+    last = 1; 
+    part2 = "";
   }
-  if(name1[index].substr(name1[index].length-last,1)=="1"){
-    part1="white_";
-  }else{
-    part1="black_";
+  if (item.substr(item.length - last, 1) == "1") {
+    part1 = "white_";
+  } else {
+    part1 = "black_";
   }
-  part3=name1[index].substr(0,name1[index].length-last);
-  address=a+part1+part2+part3+b;
-  name2[index].src=address;
- });};
+  part3 = item.substr(0, item.length - last);
+  address = a + part1 + part2 + part3 + b;
+  name2[index].src = address;
+});
+
+};
+
 const bord=new Image();
 bord.src="./syogi_koma/syogiban.png";
 const  lance1=new Image(), lance2=new Image(), knight1=new Image(), knight2=new Image(), silver1=new Image(),
@@ -69,7 +73,7 @@ const draw=function(){
   ctx.beginPath();
   ctx.drawImage(bord, 0, 0, 439, 480);
   for(let i=0;i<81;i++){
-    ctx.drawImage(trans.field.substr(i,1),47.35*i%9+7,51.9*((i-i%9)/9)+7,47.35,51.9);
+    ctx.drawImage(trans[field.substr(i,1)],47.35*i%9+7,51.9*((i-i%9)/9)+7,47.35,51.9);
   }
 };
 
