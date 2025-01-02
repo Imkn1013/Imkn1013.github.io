@@ -54,7 +54,7 @@ const  lance1=new Image(), lance2=new Image(), knight1=new Image(), knight2=new 
   pawn1p=new Image(), pawn2p=new Image(),dragon1=new Image(), horse1=new Image(), dragon2=new Image(), horse2=new Image();
 
 mkaddress([
-  "lance1","lance2","knight1","knight2","silver1","silver2","gold1","gold2","king1","king2","pown1","pown2",
+  "lance1","lance2","knight1","knight2","silver1","silver2","gold1","gold2","king1","king2","pawn1","pawn2",
   "bishop1","rook1","bishop2","rook2","lance1p","lance2p","knight1p","knight2p","silver1p","silver2p","pawn1p","pawn2p","dragon1","horse1","dragon2","horse2"
   ],[
   lance1,lance2,knight1,knight2,silver1,silver2,gold1,gold2,emperor1,emperor2,pawn1,pawn2,
