@@ -83,7 +83,7 @@ const draw=function(){
   ctx.drawImage(bord, 0, 0, 439, 480);
   for(let i=0;i<81;i++){
     if(field.substr(i,1)!=="n"){
-    ctx.drawImage(trans[field.substr(i,1)],size*(47.35*(i%9)+7),size*(51.9*((i-i%9)/9)+7),size*(47.35),size*(51.9);
+    ctx.drawImage(trans[field.substr(i,1)],size*(47.35*(i%9)+7),size*(51.9*((i-i%9)/9)+7),size*(47.35),size*(51.9));
     }
   }
 };
@@ -92,8 +92,8 @@ const draw=function(){
 let rect, x, y;
 canvas.addEventListener('click', (event) => {
     rect = canvas.getBoundingClientRect();
-    x = Math.floor((event.clientX - rect.left) / (size*(47.35));
-    y = Math.floor((event.clientY - rect.top) / (size*(51.9));
+    x = Math.floor((event.clientX - rect.left) / (size*(47.35)));
+    y = Math.floor((event.clientY - rect.top) / (size*(51.9)));
     draw();
 });
 
