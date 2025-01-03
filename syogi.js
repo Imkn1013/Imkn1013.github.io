@@ -84,7 +84,7 @@ const draw=function(){
   ctx.drawImage(bord, 0, 0, 439*size, 480*size);
   for(let i=0;i<81;i++){
     if(field.substr(i,1)!=="n"){
-    ctx.drawImage(trans[field.substr(i,1)],size*(47.35*(i%9)+7)*(878/960),size*(51.9*((i-i%9)/9)+7)*(878/960),size*(47.35)*(878/960),size*(51.9)*(878/960));
+    ctx.drawImage(trans[field.substr(i,1)],size*(47.35*(i%9)+7),size*(51.9*((i-i%9)/9)+7),size*(47.35),size*(51.9));
     }
   }
 };
