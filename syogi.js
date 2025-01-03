@@ -89,5 +89,6 @@ canvas.addEventListener('click', (event) => {
 });
 
 bord.onload = () => {
+console.log("bord loaded");
 ctx.drawImage(bord, 0, 0, 439, 480);
 };
