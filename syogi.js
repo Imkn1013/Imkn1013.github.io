@@ -81,7 +81,7 @@ const trans = {
 const draw=function(){
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.beginPath();
-  ctx.drawImage(bord, 0, 0, 439, 480);
+  ctx.drawImage(bord, 0, 0, 439*size, 480*size);
   for(let i=0;i<81;i++){
     if(field.substr(i,1)!=="n"){
     ctx.drawImage(trans[field.substr(i,1)],size*(47.35*(i%9)+7)*(878/960),size*(51.9*((i-i%9)/9)+7)*(878/960),size*(47.35)*(878/960),size*(51.9)*(878/960));
@@ -99,6 +99,5 @@ canvas.addEventListener('click', (event) => {
 });
 
 bord.onload = () => {
-console.log("bord loaded");
-ctx.drawImage(bord, 0, 0, 439*size, 480*size);
+draw();
 };
