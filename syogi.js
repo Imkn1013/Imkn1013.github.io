@@ -2,11 +2,19 @@ console.log("ok3");
 console.log(who_host);
 document.getElementById("menu").style.display="none";
 document.getElementById("setting").style.display="none";
-var canvas = document.createElement("canvas");
+const canvas = document.createElement("canvas");
 document.body.appendChild(canvas);
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+let size=Math.min(window.innerWidth,window.innerHeight*(878/960))/439;
+canvas.width = size*439;
+canvas.height = size*480;
 const ctx = canvas.getContext('2d');
+
+//windowのサイズ変更に対応
+window.addEventListener('resize', function(){
+  size=Math.min(window.innerWidth,window.innerHeight*(878/960))/439;
+  canvas.width = size*439;
+  canvas.height = size*480;
+});
 
 //データ送受信関数
 const send=function(){
@@ -75,7 +83,7 @@ const draw=function(){
   ctx.drawImage(bord, 0, 0, 439, 480);
   for(let i=0;i<81;i++){
     if(field.substr(i,1)!=="n"){
-    ctx.drawImage(trans[field.substr(i,1)],47.35*i%9+7,51.9*((i-i%9)/9)+7,47.35,51.9);
+    ctx.drawImage(trans[field.substr(i,1)],size*(47.35*(i%9)+7),size*(51.9*((i-i%9)/9)+7),size*(47.35),size*(51.9);
     }
   }
 };
@@ -84,12 +92,12 @@ const draw=function(){
 let rect, x, y;
 canvas.addEventListener('click', (event) => {
     rect = canvas.getBoundingClientRect();
-    x = Math.floor((event.clientX - rect.left) / 47.35);
-    y = Math.floor((event.clientY - rect.top) / 51.9);
+    x = Math.floor((event.clientX - rect.left) / (size*(47.35));
+    y = Math.floor((event.clientY - rect.top) / (size*(51.9));
     draw();
 });
 
 bord.onload = () => {
 console.log("bord loaded");
-ctx.drawImage(bord, 0, 0, 439, 480);
+ctx.drawImage(bord, 0, 0, 439*size, 480*size);
 };
