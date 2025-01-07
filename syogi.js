@@ -17,13 +17,19 @@ window.addEventListener('resize', function(){
   draw();
 });
 
+let turn=false;
+if(whihost==socket.id){
+  turn=true;
+}
+
 //データ送受信関数
 const send=function(){
   socket.emit("field",field);
+  turn=false;
 };
 
 socket.on("field",function(){
-  
+  turn=true;
 });
 
 //初期値設定
@@ -92,11 +98,12 @@ const draw=function(){
 //クリックイベント
 let rect, x, y;
 canvas.addEventListener('click', (event) => {
+  if(turn==true){
     rect = canvas.getBoundingClientRect();
     x = Math.floor((event.clientX - rect.left-7) / (size*(48)));
     y = Math.floor((event.clientY - rect.top-7) / (size*(473/9)));
-    console.log(x,y);
     draw();
+  }
 });
 
 bord.onload = () => {
