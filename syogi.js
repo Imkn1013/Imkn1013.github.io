@@ -108,7 +108,7 @@ canvas.addEventListener('click', (event) => {
     rect = canvas.getBoundingClientRect();
     x = Math.floor((event.clientX - rect.left-7) / (size*(48)));
     y = Math.floor((event.clientY - rect.top-7) / (size*(473/9)));
-    if(field.substr(9*y+x,1)!=="n" && /^[A-Z]+$/g.test(field.substr(9*y+x,1)==true){
+    if(field.substr(9*y+x,1)!=="n" && /^[A-Z]+$/g.test(field.substr(9*y+x,1))==true){
       redline=[x,y];
     }else{
       redline=null;
