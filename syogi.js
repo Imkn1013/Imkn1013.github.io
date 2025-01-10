@@ -132,7 +132,7 @@ canvas.addEventListener('click', (event) => {
       }
     });
     };
-    if(redline[0]==x&&redline[1]==y){
+    if(redline!==null&&(redline[0]==x&&redline[1]==y)){
       redline=null;
     }else if(field[y][x]!=="n" && /^[a-z]+$/g.test(field[y][x])==true){
       redline=[x,y];
