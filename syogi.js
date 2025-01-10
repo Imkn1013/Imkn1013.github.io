@@ -18,7 +18,7 @@ window.addEventListener('resize', function(){
 });
 
 let turn=false;
-if(whihost==socket.id){
+if(who_host==socket.id){
   turn=true;
 }
 
@@ -35,6 +35,7 @@ socket.on("field",function(){
 //初期値設定
 let field="LKSGEGSKLnRnnnnnBnPPPPPPPPPnnnnnnnnnnnnnnnnnnnnnnnnnnnpppppppppnbnnnnnrnlksgegskl";
 let redline=null;
+let movepoint=null;
 
 //画像読み込み
 const a="./syogi_koma/";
