@@ -34,6 +34,7 @@ socket.on("field",function(){
 
 //初期値設定
 let field="LKSGEGSKLnRnnnnnBnPPPPPPPPPnnnnnnnnnnnnnnnnnnnnnnnnnnnpppppppppnbnnnnnrnlksgegskl";
+let redline=null;
 
 //画像読み込み
 const a="./syogi_koma/";
@@ -83,7 +84,7 @@ const trans = {
   "l": lance2, "k": knight2, "s": silver2, "g": gold2, "e": emperor2, "r": rook2, "b": bishop2, "p": pawn2, "d": dragon2, "h": horse2, "t": pawn2p, "x": lance2p, "y": knight2p, "z": silver2p,
   "n": null
 };
-
+ctx.strokeStyle = "red";
 const draw=function(){
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.beginPath();
@@ -92,6 +93,11 @@ const draw=function(){
     if(field.substr(i,1)!=="n"){
     ctx.drawImage(trans[field.substr(i,1)],size*(48*(i%9)+7),size*((473/9)*((i-i%9)/9)+7),size*(48),size*(473/9));
     }
+  }
+  if(redline!==null){
+    ctx.lineWidth = 2*size;
+    ctx.rect((7+48*redline[0]+1.5)*size, (7+(473/9)*redline[1]+1.5)*size,(48-3)*size, ((473/9)-3)*size);
+    ctx.stroke();
   }
 };
 
@@ -102,6 +108,11 @@ canvas.addEventListener('click', (event) => {
     rect = canvas.getBoundingClientRect();
     x = Math.floor((event.clientX - rect.left-7) / (size*(48)));
     y = Math.floor((event.clientY - rect.top-7) / (size*(473/9)));
+    if(field.substr(9*y+x,1)!=="n" && /^[A-Z]+$/g.test(field.substr(9*y+x,1)==true){
+      redline=[x,y];
+    }else{
+      redline=null;
+    }
     draw();
   }
 });
