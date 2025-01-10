@@ -103,7 +103,7 @@ const draw=function(){
   ctx.beginPath();
   ctx.drawImage(bord, 0, 0, 439*size, 480*size);
   for(let i=0;i<9;i++){
-    for(let k=0;i<9;i++){
+    for(let k=0;k<9;k++){
     if(field[i][k]!=="n"){
     ctx.drawImage(trans[field[i][k]],size*(48*k+7),size*((473/9)*i+7),size*(48),size*(473/9));
     }
