@@ -37,6 +37,7 @@ let field="LKSGEGSKLnRnnnnnBnPPPPPPPPPnnnnnnnnnnnnnnnnnnnnnnnnnnnpppppppppnbnnnn
 let redline=null;
 let movepoint=null;
 
+
 //画像読み込み
 const a="./syogi_koma/";
 const b=".png";
@@ -109,7 +110,9 @@ canvas.addEventListener('click', (event) => {
     rect = canvas.getBoundingClientRect();
     x = Math.floor((event.clientX - rect.left-7) / (size*(48)));
     y = Math.floor((event.clientY - rect.top-7) / (size*(473/9)));
-    if(field.substr(9*y+x,1)!=="n" && /^[A-Z]+$/g.test(field.substr(9*y+x,1))==true){
+    if(redline==[x,y]){
+      redline=null;
+    }else if(field.substr(9*y+x,1)!=="n" && /^[a-z]+$/g.test(field.substr(9*y+x,1))==true){
       redline=[x,y];
     }else{
       redline=null;
