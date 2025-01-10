@@ -126,7 +126,7 @@ canvas.addEventListener('click', (event) => {
     y = Math.floor((event.clientY - rect.top-7) / (size*(473/9)));
     moveok=false;
     if(redline!==null){
-    canmove[field[y][x]].forEach(function(value){
+    canmove[field[redline[1]][redline[1]]].forEach(function(value){
       if(redline[1]*9+redline[0]+value==9*y+x){
         moveok=true;
       }
