@@ -125,11 +125,13 @@ canvas.addEventListener('click', (event) => {
     x = Math.floor((event.clientX - rect.left-7) / (size*(48)));
     y = Math.floor((event.clientY - rect.top-7) / (size*(473/9)));
     moveok=false;
+    if(redline!==null){
     canmove[field[y][x]].forEach(function(value){
       if(redline[1]*9+redline[0]+value==9*y+x){
         moveok=true;
       }
     });
+    };
     if(redline[0]==x&&redline[1]==y){
       redline=null;
     }else if(field[y][x]!=="n" && /^[a-z]+$/g.test(field[y][x])==true){
