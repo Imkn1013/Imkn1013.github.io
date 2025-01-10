@@ -33,9 +33,20 @@ socket.on("field",function(){
 });
 
 //初期値設定
-let field="LKSGEGSKLnRnnnnnBnPPPPPPPPPnnnnnnnnnnnnnnnnnnnnnnnnnnnpppppppppnbnnnnnrnlksgegskl";
+let field=[["L","K","S","G","E","G","S","K","L"],
+           ["n","R","n","n","n","n","n","B","n"],
+           ["P","P","P","P","P","P","P","P","P"],
+           ["n","n","n","n","n","n","n","n","n"],
+           ["n","n","n","n","n","n","n","n","n"],
+           ["n","n","n","n","n","n","n","n","n"],
+           ["p","p","p","p","p","p","p","p","p"],
+           ["n","B","n","n","n","n","n","R","n"],
+           ["l","k","s","g","e","g","s","k","l"]];
 let redline=null;
 let movepoint=null;
+const canmove={
+  "p":[-9]
+};
 
 
 //画像読み込み
@@ -91,9 +102,11 @@ const draw=function(){
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.beginPath();
   ctx.drawImage(bord, 0, 0, 439*size, 480*size);
-  for(let i=0;i<81;i++){
-    if(field.substr(i,1)!=="n"){
-    ctx.drawImage(trans[field.substr(i,1)],size*(48*(i%9)+7),size*((473/9)*((i-i%9)/9)+7),size*(48),size*(473/9));
+  for(let i=0;i<9;i++){
+    for(let k=0;i<9;i++){
+    if(field[i][k]!=="n"){
+    ctx.drawImage(trans[field[i][k]],size*(48*k+7),size*((473/9)*i+7),size*(48),size*(473/9));
+    }
     }
   }
   if(redline!==null){
@@ -105,15 +118,28 @@ const draw=function(){
 
 //クリックイベント
 let rect, x, y;
+let moveok=false;
 canvas.addEventListener('click', (event) => {
   if(turn==true){
     rect = canvas.getBoundingClientRect();
     x = Math.floor((event.clientX - rect.left-7) / (size*(48)));
     y = Math.floor((event.clientY - rect.top-7) / (size*(473/9)));
-    if(redline==[x,y]){
+    moveok=false;
+    canmove[field[y][x]].forEach(function(value){
+      if(redline[1]*9+redline[0]+value==9*y+x){
+        moveok=true;
+      }
+    });
+    if(redline[0]==x&&redline[1]==y){
       redline=null;
-    }else if(field.substr(9*y+x,1)!=="n" && /^[a-z]+$/g.test(field.substr(9*y+x,1))==true){
+    }else if(field[y][x]!=="n" && /^[a-z]+$/g.test(field[y][x])==true){
       redline=[x,y];
+    }else if(moveok==true){
+      redline=null;
+      //fieldの更新
+      field[y][x]=field[redline[1]][redline[0]];
+      field[redline[1]][redline[0]]="n";
+      send();
     }else{
       redline=null;
     }
