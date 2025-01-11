@@ -23,8 +23,21 @@ if(who_host==socket.id){
 }
 
 //データ送受信関数
-const send=function(){
-  socket.emit("field",field);
+let serve=[[],[],[],[],[],[],[],[],[]];
+const send=function();
+  for(let i=0;i<9;i++){
+    serve[i]=field[9-i].reverse();
+  }
+  for(let i=0;i<9;i++){
+  for(let k=0;k<9;k++){
+   if(serve[i][k]!=="n" && /^[a-z]+$/g.test(serve[i][k])==true){
+     serve[i][k]=serve[i][k].toUpperCase();
+   }else{
+     serve[i][k]=serve[i][k].toLowerCase();
+   }
+  }
+  }
+  socket.emit("field",serve);
   turn=false;
 };
 
