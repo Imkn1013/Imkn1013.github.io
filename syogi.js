@@ -137,10 +137,10 @@ canvas.addEventListener('click', (event) => {
     }else if(field[y][x]!=="n" && /^[a-z]+$/g.test(field[y][x])==true){
       redline=[x,y];
     }else if(moveok==true){
-      redline=null;
       //fieldの更新
       field[y][x]=field[redline[1]][redline[0]];
       field[redline[1]][redline[0]]="n";
+      redline=null;
       send();
     }else{
       redline=null;
