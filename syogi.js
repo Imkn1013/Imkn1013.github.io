@@ -40,7 +40,7 @@ let field=[["L","K","S","G","E","G","S","K","L"],
            ["n","n","n","n","n","n","n","n","n"],
            ["n","n","n","n","n","n","n","n","n"],
            ["p","p","p","p","p","p","p","p","p"],
-           ["n","B","n","n","n","n","n","R","n"],
+           ["n","b","n","n","n","n","n","r","n"],
            ["l","k","s","g","e","g","s","k","l"]];
 let redline=null;
 let movepoint=null;
