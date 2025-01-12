@@ -13,30 +13,39 @@ https://opensource.org/licenses/mit-license.php
 </head>
 <body>
 <div id="menu">
-  <div id="setting">
-  <h1>ボードゲーム集</h1>
-  <h6>―現在の収録数：0</h6>
+   <h1>ボードゲーム集</h1><br>
+   <h6>―現在の収録数：0</h6>
+   <br>
   <div>
-  <label for="roomidarea">ルームIDを入力</label>
-  <input id="roomidarea" type="text"></div><br><div>
-  <label for="joinnum">参加人数を設定</label>
-  <input id="joinnum" type="tel">
+    <label for="roomidarea">ルームIDを入力</label>
+    <input id="roomidarea" type="text">
   </div><br><div>
-  <button id="mkroom">ルームを作成/参加</button>
-  <button id="leaveRoom">ルームを退出</button>
-  </div><br><div>
+    <label for="joinnum">参加人数を設定</label>
+    <input id="joinnum" type="tel">
+   </div><br><div>
+    <button id="mkroom">ルームを作成/参加</button>
+    <button id="leaveRoom">ルームを退出</button>
+   </div><br><div>
     <button id="syogi_button">将棋(2人)</button>
-  <button id="yonma_button"><s>麻雀(四麻)</s></button>
-  <button id="sanma_button"><s>麻雀(三麻)</s></button>
+    <button id="yonma_button"><s>麻雀(四麻)</s></button>
+    <button id="sanma_button"><s>麻雀(三麻)</s></button>
+   </div><br>
     <p>※将棋はゲームを開始した人が後手です。</p>
-  </div><br></div><div>
-  <label for="messagearea">メッセージを入力</label>
-  <input id="messagearea" type="text">
-  <button id="sendmessage">ルームにメッセージを送信</button></div>
-  <p>メンバーリスト</p>
+  <br>
+  <p>メンバーリスト</p><br>
   <ul id="memberList"></ul>
-  <p>チャット</p>
-  <ul id="chatlist"></ul>
+  <br>
+  <div>
+  <div id=chats>
+   <label for="messagearea">メッセージを入力</label>
+   <input id="messagearea" type="text">
+  </div><br><div>
+   <button id="sendmessage">ルームにメッセージを送信</button>
+  </div><br><div>
+   <p>チャット</p><br>
+   <ul id="chatlist"></ul>
+  </div>
+  </div>
 </div>
 <script>
   var who_host;
