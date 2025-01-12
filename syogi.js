@@ -11,9 +11,9 @@ const ctx = canvas.getContext('2d');
 
 if(window.innerHeight<=window.innerWidth){
 document.getElementById("chats").style.top="0";
-document.getElementById("chats").style.left="canvas.width";
+document.getElementById("chats").style.left=canvas.width;
 }else{
-document.getElementById("chats").style.top="canvas.height";
+document.getElementById("chats").style.top=canvas.height;
 document.getElementById("chats").style.left="0";
 }
 
@@ -25,9 +25,9 @@ window.addEventListener('resize', function(){
   draw();
   if(window.innerHeight<=window.innerWidth){
    document.getElementById("chats").style.top="0";
-   document.getElementById("chats").style.left="canvas.width";
+   document.getElementById("chats").style.left=canvas.width;
   }else{
-   document.getElementById("chats").style.top="canvas.height";
+   document.getElementById("chats").style.top=canvas.height;
    document.getElementById("chats").style.left="0";
   }
 });
