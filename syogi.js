@@ -1,7 +1,6 @@
 console.log("ok3");
 console.log(who_host);
-document.getElementById("menu").style.display="none";
-document.getElementById("chats").style.display="inline";
+document.getElementById("others").style.display="none";
 document.getElementById("chats").style.position="absolute";
 const canvas = document.createElement("canvas");
 document.body.appendChild(canvas);
