@@ -154,7 +154,7 @@ canvas.addEventListener('click', (event) => {
     redthing=field[redline[1]][redline[0]];
     if(redthing!=="n"){
     canmove[redthing].forEach(function(value){
-      if(redline[0]+value[0]==x && redline[1]+value[1]==y && (field[y][x]==n || /^[A-Z]+$/g.test(field[y][x])==true)){
+      if(redline[0]+value[0]==x && redline[1]+value[1]==y && (field[y][x]=="n" || /^[A-Z]+$/g.test(field[y][x])==true)){
         moveok=true;
       }
     });
