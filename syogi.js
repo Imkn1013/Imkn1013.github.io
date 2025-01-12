@@ -9,7 +9,7 @@ canvas.width = size*439;
 canvas.height = size*480;
 const ctx = canvas.getContext('2d');
 
-if(window.height<=window.width){
+if(window.innerHeight<=window.innerWidth){
 document.getElementById("chats").style.top="0";
 document.getElementById("chats").style.left="canvas.width";
 }else{
@@ -23,13 +23,13 @@ window.addEventListener('resize', function(){
   canvas.width = size*439;
   canvas.height = size*480;
   draw();
-  if(window.height<=window.width){
-document.getElementById("chats").style.top="0";
-document.getElementById("chats").style.left="canvas.width";
-}else{
-document.getElementById("chats").style.top="canvas.height";
-document.getElementById("chats").style.left="0";
-}
+  if(window.innerHeight<=window.innerWidth){
+   document.getElementById("chats").style.top="0";
+   document.getElementById("chats").style.left="canvas.width";
+  }else{
+   document.getElementById("chats").style.top="canvas.height";
+   document.getElementById("chats").style.left="0";
+  }
 });
 
 let turn=false;
