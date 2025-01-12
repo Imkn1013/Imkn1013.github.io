@@ -134,12 +134,14 @@ const draw=function(){
 //クリックイベント
 let rect, x, y;
 let moveok=false;
+let sendok=false;
 canvas.addEventListener('click', (event) => {
   rect = canvas.getBoundingClientRect();
     x = Math.floor((event.clientX - rect.left-7) / (size*(48)));
     y = Math.floor((event.clientY - rect.top-7) / (size*(473/9)));
   if(turn==true && x>=0 && x<9 && y>=0 && y<9){
     moveok=false;
+    sendok=false;
     if(redline!==null){
     canmove[field[redline[1]][redline[0]]].forEach(function(value){
       if(redline[1]*9+redline[0]+value==9*y+x){
@@ -156,11 +158,14 @@ canvas.addEventListener('click', (event) => {
       field[y][x]=field[redline[1]][redline[0]];
       field[redline[1]][redline[0]]="n";
       redline=null;
-      send();
+      sendok=true;
     }else{
       redline=null;
     }
     draw();
+    if(sendok==true){
+      send();
+    }
   }
 });
 
