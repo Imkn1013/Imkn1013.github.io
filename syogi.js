@@ -26,7 +26,7 @@ if(who_host==socket.id){
 let serve=[[],[],[],[],[],[],[],[],[]];
 const send=function(){
   for(let i=0;i<9;i++){
-    serve[i]=field[9-i].reverse();
+    serve[i]=field[8-i].reverse();
   }
   for(let i=0;i<9;i++){
   for(let k=0;k<9;k++){
@@ -41,8 +41,10 @@ const send=function(){
   turn=false;
 };
 
-socket.on("field",function(){
+socket.on("field",function(data){
   turn=true;
+  field=data;
+  draw();
 });
 
 //初期値設定
@@ -133,10 +135,10 @@ const draw=function(){
 let rect, x, y;
 let moveok=false;
 canvas.addEventListener('click', (event) => {
-  if(turn==true){
-    rect = canvas.getBoundingClientRect();
+  rect = canvas.getBoundingClientRect();
     x = Math.floor((event.clientX - rect.left-7) / (size*(48)));
     y = Math.floor((event.clientY - rect.top-7) / (size*(473/9)));
+  if(turn==true && x>=0 && x<9 && y>=0 && y<9){
     moveok=false;
     if(redline!==null){
     canmove[field[redline[1]][redline[0]]].forEach(function(value){
