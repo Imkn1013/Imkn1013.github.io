@@ -24,7 +24,7 @@ if(who_host==socket.id){
 
 //データ送受信関数
 let serve=[[],[],[],[],[],[],[],[],[]];
-const send=function();
+const send=function(){
   for(let i=0;i<9;i++){
     serve[i]=field[9-i].reverse();
   }
