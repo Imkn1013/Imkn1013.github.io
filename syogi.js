@@ -60,7 +60,15 @@ let field=[["L","K","S","G","E","G","S","K","L"],
 let redline=null;
 let movepoint=null;
 const canmove={
-  "p":[-9]
+  "p":[[0,-1]],
+  "e":[[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]],
+  "g":[[-1,-1],[-1,0],[0,-1],[0,1],[1,-1],[1,0]],
+  "t":[[-1,-1],[-1,0],[0,-1],[0,1],[1,-1],[1,0]],
+  "x":[[-1,-1],[-1,0],[0,-1],[0,1],[1,-1],[1,0]],
+  "y":[[-1,-1],[-1,0],[0,-1],[0,1],[1,-1],[1,0]],
+  "z":[[-1,-1],[-1,0],[0,-1],[0,1],[1,-1],[1,0]],
+  "s":[[-1,-1],[-1,1],[0,-1],[1,-1],[1,1]],
+  "k":[[-1,-2],[1,-2]],
 };
 
 
@@ -132,7 +140,7 @@ const draw=function(){
 };
 
 //クリックイベント
-let rect, x, y;
+let rect, x, y ,redthing;
 let moveok=false;
 let sendok=false;
 canvas.addEventListener('click', (event) => {
@@ -143,11 +151,14 @@ canvas.addEventListener('click', (event) => {
     moveok=false;
     sendok=false;
     if(redline!==null){
-    canmove[field[redline[1]][redline[0]]].forEach(function(value){
-      if(redline[1]*9+redline[0]+value==9*y+x){
+    redthing=field[redline[1]][redline[0]];
+    if(redthing!=="n"){
+    canmove[redthing].forEach(function(value){
+      if(redline[0]+value[0]==x && redline[1]+value[1]==y && (field[y][x]==n || /^[A-Z]+$/g.test(field[y][x])==true)){
         moveok=true;
       }
     });
+    }
     };
     if(redline!==null&&(redline[0]==x&&redline[1]==y)){
       redline=null;
