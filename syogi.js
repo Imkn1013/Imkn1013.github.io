@@ -1,7 +1,8 @@
 console.log("ok3");
 console.log(who_host);
 document.getElementById("menu").style.display="none";
-document.getElementById("setting").style.display="none";
+document.getElementById("chats").style.display="inline";
+document.getElementById("chats").style.position="absolute";
 const canvas = document.createElement("canvas");
 document.body.appendChild(canvas);
 let size=Math.min(window.innerWidth,window.innerHeight*(878/960))/439;
@@ -9,12 +10,27 @@ canvas.width = size*439;
 canvas.height = size*480;
 const ctx = canvas.getContext('2d');
 
+if(window.height<=window.width){
+document.getElementById("chats").style.top="0";
+document.getElementById("chats").style.left="canvas.width";
+}else{
+document.getElementById("chats").style.top="canvas.height";
+document.getElementById("chats").style.left="0";
+}
+
 //windowのサイズ変更に対応
 window.addEventListener('resize', function(){
   size=Math.min(window.innerWidth,window.innerHeight*(878/960))/439;
   canvas.width = size*439;
   canvas.height = size*480;
   draw();
+  if(window.height<=window.width){
+document.getElementById("chats").style.top="0";
+document.getElementById("chats").style.left="canvas.width";
+}else{
+document.getElementById("chats").style.top="canvas.height";
+document.getElementById("chats").style.left="0";
+}
 });
 
 let turn=false;
