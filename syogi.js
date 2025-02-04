@@ -9,13 +9,9 @@ canvas.width = size*439;
 canvas.height = size*480;
 const ctx = canvas.getContext('2d');
 
-if(window.innerHeight<=window.innerWidth){
-document.getElementById("chats").style.top="0";
-document.getElementById("chats").style.left=canvas.width;
-}else{
 document.getElementById("chats").style.top=canvas.height;
 document.getElementById("chats").style.left="0";
-}
+
 
 //windowのサイズ変更に対応
 window.addEventListener('resize', function(){
@@ -23,13 +19,8 @@ window.addEventListener('resize', function(){
   canvas.width = size*439;
   canvas.height = size*480;
   draw();
-  if(window.innerHeight<=window.innerWidth){
-   document.getElementById("chats").style.top="0";
-   document.getElementById("chats").style.left=canvas.width;
-  }else{
-   document.getElementById("chats").style.top=canvas.height;
-   document.getElementById("chats").style.left="0";
-  }
+document.getElementById("chats").style.top=canvas.height;
+document.getElementById("chats").style.left="0";
 });
 
 let turn=false;
