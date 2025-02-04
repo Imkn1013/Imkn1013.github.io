@@ -9,7 +9,7 @@ canvas.width = size*439;
 canvas.height = size*480;
 const ctx = canvas.getContext('2d');
 
-document.getElementById("chats").style.top=canvas.height;
+document.getElementById("chats").style.top=canvas.height+"px";
 document.getElementById("chats").style.left="0";
 
 
@@ -19,7 +19,7 @@ window.addEventListener('resize', function(){
   canvas.width = size*439;
   canvas.height = size*480;
   draw();
-document.getElementById("chats").style.top=canvas.height;
+document.getElementById("chats").style.top=canvas.height+"px";
 document.getElementById("chats").style.left="0";
 });
 
