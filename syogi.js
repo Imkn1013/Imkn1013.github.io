@@ -29,7 +29,7 @@ if(who_host==socket.id){
 }
 
 //データ送受信関数
-let serve=[[],[],[],[],[],[],[],[],[]];
+let serve=[[[],[],[],[],[],[],[],[],[]],mycaptured];
 const send=function(){
   for(let i=0;i<9;i++){
     serve[i]=field[8-i].reverse();
@@ -49,11 +49,14 @@ const send=function(){
 
 socket.on("field",function(data){
   turn=true;
-  field=data;
+  field=data[0];
+  yourcapture=data[1];
   draw();
 });
 
 //初期値設定
+let mycaptured=[0,0,0,0,0,0,0];
+let yourcaptured=[0,0,0,0,0,0,0];
 let field=[["L","K","S","G","E","G","S","K","L"],
            ["n","R","n","n","n","n","n","B","n"],
            ["P","P","P","P","P","P","P","P","P"],
@@ -126,6 +129,9 @@ const trans = {
   "l": lance2, "k": knight2, "s": silver2, "g": gold2, "e": emperor2, "r": rook2, "b": bishop2, "p": pawn2, "d": dragon2, "h": horse2, "t": pawn2p, "x": lance2p, "y": knight2p, "z": silver2p,
   "n": null
 };
+const havingID ={
+  "P":0,"T":0,"G":1,"S":2,"Z":2,"K":3,"Y":3,"L":4,"X":4,"R":5,"D":5,"B":6,"H":6
+}
 ctx.strokeStyle = "red";
 const draw=function(){
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -158,7 +164,7 @@ canvas.addEventListener('click', (event) => {
     sendok=false;
     if(redline!==null){
     redthing=field[redline[1]][redline[0]];
-    if(redthing!=="n" &&redthing!=="l" &&redthing!=="b" &&redthing!=="r"){
+    if(redthing!=="n" &&redthing!=="l" &&redthing!=="b" &&redthing!=="r" &&redthing!=="d" &&redthing!=="h"){
     canmove[redthing].forEach(function(value){
       if(redline[0]+value[0]==x && redline[1]+value[1]==y && (field[y][x]=="n" || /^[A-Z]+$/g.test(field[y][x])==true)){
         moveok=true;
