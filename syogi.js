@@ -28,39 +28,8 @@ if(who_host==socket.id){
   turn=true;
 }
 
-//描画関数
-const trans = {
-  "L": lance1, "K": knight1, "S": silver1, "G": gold1, "E": emperor1, "R": rook1, "B": bishop1, "P": pawn1, "D": dragon1, "H": horse1, "T": pawn1p, "X": lance1p, "Y": knight1p, "Z": silver1p,
-  "l": lance2, "k": knight2, "s": silver2, "g": gold2, "e": emperor2, "r": rook2, "b": bishop2, "p": pawn2, "d": dragon2, "h": horse2, "t": pawn2p, "x": lance2p, "y": knight2p, "z": silver2p,
-  "n": null
-};
-const havingID ={
-  "P":0,"T":0,"G":1,"S":2,"Z":2,"K":3,"Y":3,"L":4,"X":4,"R":5,"D":5,"B":6,"H":6
-}
-ctx.strokeStyle = "red";
-const draw=function(){
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.beginPath();
-  ctx.drawImage(bord, 0, 0, 439*size, 480*size);
-  for(let i=0;i<9;i++){
-    for(let k=0;k<9;k++){
-    if(field[i][k]!=="n"){
-    ctx.drawImage(trans[field[i][k]],size*(48*k+7),size*((473/9)*i+7),size*(48),size*(473/9));
-    }
-    }
-  }
-  if(redline!==null){
-    ctx.lineWidth = 2*size;
-    ctx.rect((7+48*redline[0]+1.5)*size, (7+(473/9)*redline[1]+1.5)*size,(48-3)*size, ((473/9)-3)*size);
-    ctx.stroke();
-  }
-};
-
-
 //データ送受信関数
-let mycaptured=[0,0,0,0,0,0,0];
-let yourcaptured=[0,0,0,0,0,0,0];
-let serve=[[[],[],[],[],[],[],[],[],[]],mycaptured];
+let serve=[[],[],[],[],[],[],[],[],[]];
 const send=function(){
   for(let i=0;i<9;i++){
     serve[i]=field[8-i].reverse();
@@ -80,8 +49,7 @@ const send=function(){
 
 socket.on("field",function(data){
   turn=true;
-  field=data[0];
-  yourcapture=data[1];
+  field=data;
   draw();
 });
 
@@ -152,6 +120,30 @@ mkaddress([
   bishop1,rook1,bishop2,rook2,lance1p,lance2p,knight1p,knight2p,silver1p,silver2p,pawn1p,pawn2p,dragon1,horse1,dragon2,horse2
 ]);
 
+//描画関数
+const trans = {
+  "L": lance1, "K": knight1, "S": silver1, "G": gold1, "E": emperor1, "R": rook1, "B": bishop1, "P": pawn1, "D": dragon1, "H": horse1, "T": pawn1p, "X": lance1p, "Y": knight1p, "Z": silver1p,
+  "l": lance2, "k": knight2, "s": silver2, "g": gold2, "e": emperor2, "r": rook2, "b": bishop2, "p": pawn2, "d": dragon2, "h": horse2, "t": pawn2p, "x": lance2p, "y": knight2p, "z": silver2p,
+  "n": null
+};
+ctx.strokeStyle = "red";
+const draw=function(){
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.beginPath();
+  ctx.drawImage(bord, 0, 0, 439*size, 480*size);
+  for(let i=0;i<9;i++){
+    for(let k=0;k<9;k++){
+    if(field[i][k]!=="n"){
+    ctx.drawImage(trans[field[i][k]],size*(48*k+7),size*((473/9)*i+7),size*(48),size*(473/9));
+    }
+    }
+  }
+  if(redline!==null){
+    ctx.lineWidth = 2*size;
+    ctx.rect((7+48*redline[0]+1.5)*size, (7+(473/9)*redline[1]+1.5)*size,(48-3)*size, ((473/9)-3)*size);
+    ctx.stroke();
+  }
+};
 
 //クリックイベント
 let rect, x, y ,redthing;
@@ -166,7 +158,7 @@ canvas.addEventListener('click', (event) => {
     sendok=false;
     if(redline!==null){
     redthing=field[redline[1]][redline[0]];
-    if(redthing!=="n" &&redthing!=="l" &&redthing!=="b" &&redthing!=="r" &&redthing!=="d" &&redthing!=="h"){
+    if(redthing!=="n" &&redthing!=="l" &&redthing!=="b" &&redthing!=="r"){
     canmove[redthing].forEach(function(value){
       if(redline[0]+value[0]==x && redline[1]+value[1]==y && (field[y][x]=="n" || /^[A-Z]+$/g.test(field[y][x])==true)){
         moveok=true;
