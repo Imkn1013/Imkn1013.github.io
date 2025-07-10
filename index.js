@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
-
+const socket = io('https://socket-server-sgat.onrender.com');
 const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
