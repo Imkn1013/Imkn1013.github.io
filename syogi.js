@@ -105,7 +105,7 @@ const mkaddress=function(name1,name2){
 };
 
 const bord=new Image();
-bord.src="./syogi_koma/syogiban.png";
+bord.src="./syogi_koma/syogiban.svg";
 const  lance1=new Image(), lance2=new Image(), knight1=new Image(), knight2=new Image(), silver1=new Image(),
   silver2=new Image(),gold1=new Image(), gold2=new Image(),emperor1=new Image(), emperor2=new Image(), pawn1=new Image(),
   pawn2=new Image(),bishop1=new Image(), rook1=new Image(), bishop2=new Image(), rook2=new Image(),lance1p=new Image(),
