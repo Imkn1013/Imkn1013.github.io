@@ -1,6 +1,14 @@
 <html>
   <body>
     <p>test</p>
-    <script src="index.js"></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script>
+      const socket = io('https://socket-server-sgat.onrender.com');
+
+socket.on('connect', () => {
+  console.log('Connected to server!');
+});
+
+    </script>
   </body>
 </html>
